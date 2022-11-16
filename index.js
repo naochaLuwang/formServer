@@ -18,7 +18,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = "mongodb+srv://naocha:naocha234@cluster0.xr2ih8t.mongodb.net/?retryWrites=true&w=majority"
+const MONGODB_URI =
+  "mongodb+srv://naocha:naocha234@cluster0.xr2ih8t.mongodb.net/?retryWrites=true&w=majority";
 
 let i = 0;
 
@@ -37,7 +38,7 @@ cron.schedule("* * * * *", () => {
   emailScheduler();
 });
 
-const port = 5000
+const port = 5000;
 const emailScheduler = async () => {
   const formFeedbacks = await FormFeedback.find({ status: "QUEUED" });
 
@@ -66,7 +67,7 @@ const emailScheduler = async () => {
 
       var mailOptions = {
         from: process.env.SENDER_EMAIL,
-        to: "somoarambam123@gmail.com",
+        to: `${formFeedbacks[i].email}`,
         subject: `Feedback for ${formFeedbacks[i].formName}`,
         // text: "That was easy!",
         html: htmlToSend,
